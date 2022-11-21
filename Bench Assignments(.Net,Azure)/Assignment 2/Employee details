@@ -1,0 +1,5 @@
+Assignment 2: CSharpOOPSAssignment
+
+Write a console application Employee Management which allow HR staff member to register newly joined employee with EmpNo, EmpName and Salary.
+Display gross salary of employee on console. LitwareLib class Library will be used in Test console application for creating objects and invoking 
+functionality of Employee class. Use Exception Handling mechanism wherever necessary.
