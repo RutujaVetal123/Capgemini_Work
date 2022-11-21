@@ -1,0 +1,154 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Assignment_5._3
+{
+     
+    internal class Employee
+    {
+        public int EmployeeId;
+        public string FirstName,LastName,Title,City;
+        public DateTime DOB,DOJ;
+        
+        public Employee(int EmployeeId,string FirstName, string LastName,string Title,DateTime DOB,DateTime DOJ,string City)
+        {
+            this.EmployeeId = EmployeeId;
+            this.FirstName = FirstName;
+            this.LastName = LastName;
+            this.Title = Title;
+            this.DOB = DOB;
+            this.DOJ = DOJ;
+            this.City = City;
+            
+        }
+    }
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+
+            List<Employee> employees = new List<Employee>()
+            {
+               new Employee { EmployeeId=1001,FirstName = "Malcolm",LastName = "Daruwala",Title="Manager", DOB = new DateTime(1984,11,16), DOJ = new DateTime(2011,6,8),City = "Mumbai" },
+               new Employee { EmployeeId=1002,FirstName = "Astin",LastName = "Dhalla",Title="AsstManager", DOB =new DateTime(1984,8,20) , DOJ =new DateTime(2012,7,7) ,City = "Mumbai" },
+               new Employee { EmployeeId=1003,FirstName = "Madhavi",LastName = "Oza",Title="Consultent" ,DOB =new DateTime(1987,11,14) , DOJ =new DateTime(2015,5,12) ,City = "Pune" },
+               new Employee { EmployeeId=1004,FirstName = "Saba",LastName = "Shaikh",Title="SE" ,DOB = new DateTime(1990,6,3), DOJ = new DateTime(2016,2,2),City = "Pune" }
+            };
+
+            /********** Print list **********/
+
+            foreach(Employee Emp in employees)
+            {
+                Console.WriteLine("EmployeeId="+Emp.EmployeeId+"\nFirstName="+Emp.FirstName+"\nLastName="+Emp.LastName+"\nTitle="+Emp.Title+"\nDOB="+Emp.DOB.ToString("dd-MM-yyyy")+"\nDOJ="+Emp.DOJ.ToString("dd-MM-yyyy")+"\nCity="+Emp.City+"\n\n");
+            }
+            
+            /********** Employee that do not live in mumbai **********/
+            
+             IEnumerable<Employee> result1 = employees.Where(x => x.City != "Mumbai");
+            Console.WriteLine("Employee that do not live in mumbai are\n");
+
+	        foreach (Employee e in result1)
+	        {
+			     Console.WriteLine("EmployeeId="+e.EmployeeId+"\nFirstName="+e.FirstName+"\nLastName="+e.LastName+"\nTitle="+e.Title+"\nDOB="+e.DOB.ToString("dd-MM-yyyy")+"\nDOJ="+e.DOJ.ToString("dd-MM-yyyy")+"\nCity="+e.City+"\n\n");
+	        }
+	        
+	        /********** Employee whos position is AsstManager **********/
+	        
+	        IEnumerable<Employee> result2 = employees.Where(x => x.Title == "AsstManager");
+            Console.WriteLine("Employee whos position is AsstManager are\n");
+
+	        foreach (Employee e in result2)
+	        {
+			     Console.WriteLine("EmployeeId="+e.EmployeeId+"\nFirstName="+e.FirstName+"\nLastName="+e.LastName+"\nTitle="+e.Title+"\nDOB="+e.DOB.ToString("dd-MM-yyyy")+"\nDOJ="+e.DOJ.ToString("dd-MM-yyyy")+"\nCity="+e.City+"\n\n");
+	        }
+	        
+	        /********** Employee with first name starting with 'S' **********/
+	        
+	        IEnumerable<Employee> result3 = employees.Where(x => x.LastName[0] == 'S');
+            Console.WriteLine("Employee with first name starting with 'S'\n");
+
+	        foreach (Employee e in result3)
+	        {
+			     Console.WriteLine("EmployeeId="+e.EmployeeId+"\nFirstName="+e.FirstName+"\nLastName="+e.LastName+"\nTitle="+e.Title+"\nDOB="+e.DOB.ToString("dd-MM-yyyy")+"\nDOJ="+e.DOJ.ToString("dd-MM-yyyy")+"\nCity="+e.City+"\n\n");
+	        }
+	        
+	        /********** Employee Who joined before 1-1-2015 **********/
+	        
+	        DateTime dt=new DateTime(2015,1,1);
+	        IEnumerable<Employee> result4 = employees.Where(x => x.DOJ < dt);
+            Console.WriteLine("Employee Who joined before 1-1-2015 are\n");
+
+	        foreach (Employee e in result4)
+	        {
+			     Console.WriteLine("EmployeeId="+e.EmployeeId+"\nFirstName="+e.FirstName+"\nLastName="+e.LastName+"\nTitle="+e.Title+"\nDOB="+e.DOB.ToString("dd-MM-yyyy")+"\nDOJ="+e.DOJ.ToString("dd-MM-yyyy")+"\nCity="+e.City+"\n\n");
+	        }
+	        
+	        /********** Employee Who has birth year after 1-1-1990 **********/
+
+	        
+	        DateTime dt1=new DateTime(1990,1,1);
+	        IEnumerable<Employee> result5 = employees.Where(x => x.DOB > dt1);
+            Console.WriteLine("Employee Who has birth year after 1-1-1990 are\n");
+
+	        foreach (Employee e in result5)
+	        {
+			     Console.WriteLine("EmployeeId="+e.EmployeeId+"\nFirstName="+e.FirstName+"\nLastName="+e.LastName+"\nTitle="+e.Title+"\nDOB="+e.DOB.ToString("dd-MM-yyyy")+"\nDOJ="+e.DOJ.ToString("dd-MM-yyyy")+"\nCity="+e.City+"\n\n");
+	        }
+	        
+	        /********** Employee whos position is Consultent or Associate **********/
+
+	        
+	        IEnumerable<Employee> result6 = employees.Where(x => x.Title == "Consultent" || x.Title == "Associate");
+            Console.WriteLine("Employee whos position is Consultent or Associate are\n");
+
+	        foreach (Employee e in result6)
+	        {
+			     Console.WriteLine("EmployeeId="+e.EmployeeId+"\nFirstName="+e.FirstName+"\nLastName="+e.LastName+"\nTitle="+e.Title+"\nDOB="+e.DOB.ToString("dd-MM-yyyy")+"\nDOJ="+e.DOJ.ToString("dd-MM-yyyy")+"\nCity="+e.City+"\n\n");
+	        }
+	        
+	        /********** Number of employees in list **********/
+	       
+	        
+	        Console.WriteLine("\nNumber of employee present in list are = "+employees.Count);
+	        
+	        /********** Total number of employee with city chennai **********/
+	        
+	        int c1=employees.Where(x => x.City == "Chennai").Count();
+	        Console.WriteLine("Total number of employee with city chennai are=  "+c1);
+	        
+	        /********** Max Employee ID **********/
+	        
+	        int maxID = employees.Max(t => t.EmployeeId);
+
+	        Console.WriteLine("employee with highest EmpID is = "+maxID);
+	        
+	        /********** Number of Employee Who have joined after 1-1-2015 **********/
+
+	        DateTime dt2=new DateTime(2015,1,1);
+	        int c2=employees.Where(x => x.DOJ > dt2).Count();
+	        Console.WriteLine("Number of Employee Who have joined after 1-1-2015 are= "+c2);
+	        
+	        /********** Number of Employee whos position is not Associate **********/
+	        
+	       int c3=employees.Where(x => x.Title != "Associate").Count();
+	        Console.WriteLine("Number of Employee whos position is not Associate are=  "+c3+"\n");
+	        
+                /********** Smallest age  **********/
+
+	        DateTime dt8=new DateTime();
+	        dt8 = employees.Max(t => t.DOB);
+	        IEnumerable<Employee> result7 = employees.Where(x => x.DOB == dt8);
+                Console.WriteLine("\nEmployee Who has smallest age  is ");
+
+	        foreach (Employee e in result7)
+	        {
+		Console.WriteLine("EmployeeId="+e.EmployeeId+"\nFirstName="+e.FirstName+"\nLastName="+e.LastName+"\nTitle="+e.Title+"\nDOB="+e.DOB.ToString("dd-MM-yyyy")+"\nDOJ="+e.DOJ.ToString("dd-MM-yyyy")+"\nCity="+e.City+"\n\n");
+	        }
+	        
+        }
+    }
+}
