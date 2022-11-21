@@ -1,0 +1,184 @@
+Employee.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LitwareLib
+{
+    public class InvalidSalaryException : Exception
+    {
+        public InvalidSalaryException(string message) : base(message)
+        {
+        }
+    }
+    class Employee
+    {
+        private int EmpId;
+        private string EmpName;
+        private double Salary;
+        private double HRA;
+        private double TA;
+        private double DA;
+        private double PF;
+        private double TDS;
+        private double NetSalary;
+        private double GrossSalary;
+
+        public Employee() { }
+        // Get and Set for employee Id
+      
+        public int GetEmpId() {
+            return EmpId;
+        }
+        public void SetEmpId(int id) {
+            this.EmpId = id;
+        }
+
+        // Get and Set for employee name
+        public string GetEmpName()
+        {
+            return EmpName;
+        }
+        public void SetEmpName(string name) {
+            this.EmpName = name;
+        }
+
+        // Get and Set for Salary
+        public double GetSalary()
+        {
+            return Salary;
+        }
+        public void SetSalary(double salary) {
+            this.Salary = salary;
+        }
+
+
+
+
+
+        public void CalculateSalary(double salary)
+        {
+            try
+            {
+                if (salary > 0) { 
+                    if (salary < 5000)
+                    {
+                        HRA = 0.1 * salary;
+                        TA = 0.05 * salary;
+                        DA = 0.15 * salary;
+                    }
+                    else if (Salary >= 5000 && Salary < 10000)
+                    {
+                        HRA = 0.15 * salary;
+                        TA = 0.1 * salary;
+                        DA = 0.2 * salary;
+                    }
+
+                    else if (salary >= 10000 && salary < 15000)
+                    {
+                        HRA = 0.2 * salary;
+                        TA = 0.15 * salary;
+                        DA = 0.25 * salary;
+                    }
+                    else if (salary >= 15000 && salary < 20000)
+                    {
+                        HRA = 0.25 * salary;
+                        TA = 0.2 * salary;
+                        DA = 0.3 * salary;
+                    }
+
+                    else if (salary >= 20000)
+                    {
+                        HRA = 0.15 * salary;
+                        TA = 0.1 * salary;
+                        DA = 0.2 * salary;
+                    }
+
+                GrossSalary = salary + HRA + TA + DA;
+                PF = GrossSalary * 0.1;
+                TDS = GrossSalary * 0.18;
+                NetSalary = GrossSalary - (PF + TDS);
+                Console.WriteLine("\n GrossSalary : " + GrossSalary + "\n NetSalary : " + NetSalary);
+            }
+            else
+            {
+                throw (new InvalidSalaryException("Salary should be non zero and positive"));
+            }
+        }
+            catch (InvalidSalaryException e)
+            {
+                Console.WriteLine("InvalidSalaryException: {0}", e.Message);
+            }
+        
+        }
+    }
+
+    
+}
+
+
+
+Program.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LitwareLib
+
+{
+    class Program
+    {
+      
+        static void Main(string[] args)
+        {
+            int id;
+            string name;
+            double salary;
+            Employee emp = new Employee();
+            Console.WriteLine("*********** Employee Salary Calculater *********** ");
+            Console.WriteLine("\n**************** Employee Details **************** ");
+            
+            Console.WriteLine("\nEnter Employee ID : ");
+            id = Convert.ToInt16(Console.ReadLine());
+            
+            Console.WriteLine("\nEnter Employee Name : ");
+            name = Console.ReadLine();
+
+            Console.WriteLine("\nEnter Employee Salary : ");
+            salary = Convert.ToDouble(Console.ReadLine());
+            
+            emp.SetEmpId(id);
+            emp.SetEmpName(name);
+            emp.SetSalary(salary);
+
+            emp.CalculateSalary(salary);
+        }
+    }
+}
+
+
+Output Console
+
+*********** Employee Salary Calculater ***********
+
+**************** Employee Details ****************
+
+Enter Employee ID :
+100
+
+Enter Employee Name :
+Rabi
+
+Enter Employee Salary :
+12000
+
+ GrossSalary : 19200
+ NetSalary : 13824
+Press any key to continue . . .
+
