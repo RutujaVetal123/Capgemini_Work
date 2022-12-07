@@ -1,0 +1,72 @@
+Q. 1) Create the following Table
+FootBallLeague (MatchID (PK), TeamName1, TeamName2, Status, WinningTeam, Points)
+
+
+Create Or Alter  procedure InsertFootBallLeagueData(@MatchID int, @TeamName1 varchar(15), @TeamName2 varchar(15),
+@Status varchar(10), @WinningTeam varchar(15), @Points int)
+As
+Begin
+Insert into FootBallLeague(MatchID,TeamName1,TeamName2,Status,WinningTeam,Points)
+Values(@MatchID,@TeamName1,@TeamName2,@Status,@WinningTeam,@Points)
+End
+
+Exec InsertFootBallLeagueData
+@MatchID=1001,@TeamName1='Italy',@TeamName2='France',@Status='Win',@WinningTeam='France',@Points=4
+
+Exec InsertFootBallLeagueData
+@MatchID=1002,@TeamName1='Brazil',@TeamName2='Portugal',@Status='Draw',@WinningTeam='null',@Points=2
+
+Exec InsertFootBallLeagueData
+@MatchID=1003,@TeamName1='England',@TeamName2='Japan',@Status='Win',@WinningTeam='England',@Points=4
+
+Exec InsertFootBallLeagueData
+@MatchID=1004,@TeamName1='USA',@TeamName2='Russia',@Status='Win',@WinningTeam='Russia',@Points=4
+
+Exec InsertFootBallLeagueData
+@MatchID=1005,@TeamName1='Portugal',@TeamName2='Italy',@Status='Draw',@WinningTeam='null',@Points=2
+
+Exec InsertFootBallLeagueData
+@MatchID=1006,@TeamName1='Brazil',@TeamName2='France',@Status='Win',@WinningTeam='Brazil',@Points=4
+
+Exec InsertFootBallLeagueData
+@MatchID=1007,@TeamName1='England',@TeamName2='Russia',@Status='Win',@WinningTeam='Russia',@Points=4
+
+
+Exec InsertFootBallLeagueData
+@MatchID=1008,@TeamName1='Japan',@TeamName2='USA',@Status='Draw',@WinningTeam='null',@Points=2
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+
+Solve any two queries from below								
+a.	Retrieve all the winning TeamNames.
+----------------------------------------------------------
+Create Or Alter Procedure AllWinningTeamName
+As
+Begin
+select WinningTeam from FootBallLeague;
+End
+
+exec AllWinningTeamName
+-----------------------------------------------------------
+b.	Create View Match_View to display the teams whose status is Draw
+
+create view AllDrawTeams
+As
+Select TeamName1,TeamName2 from FootBallLeague where Status='Draw';
+
+select * from AllDrawTeams;
+
+c.	Retrieve the details of all matches in which Japan played
+create or Alter procedure AllMatchDetailsOfJapan
+As 
+Begin
+Select * from FootBallLeague where TeamName1='Japan' Or TeamName2='Japan';
+End
+
+exec AllMatchDetailsOfJapan
+
+
+
+
