@@ -1,0 +1,343 @@
+Task 27-12-2022
+****************************************
+Hello World
+Solution :
+using System;
+namespace HelloWorld //DO NOT change the namespace name
+{
+    public class Program //DO NOT change the class name
+    {
+        public static void Main(string[] args)  //DO NOT change the method signature
+        {
+            Console.WriteLine("Hello World");
+        }
+    }
+}
+_________________________________________________________________________________________
+-----------------------------------------------------------------------------------------
+
+Getting Inputs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace GettingInputs
+{
+    public class Program 
+    {
+        public static void Main(string[] args) 
+        {
+            Console.WriteLine("Enter an integer value");
+            int intNum=Convert.ToInt32(Console.ReadLine());
+            
+            Console.WriteLine("Enter a float value");
+            float floatNum=Convert.ToSingle(Console.ReadLine());
+            
+            Console.WriteLine("Enter a double value");
+            double doubleNum=Convert.ToDouble(Console.ReadLine());
+            
+            Console.WriteLine("Enter a long value");
+            long longNum=Convert.ToInt64(Console.ReadLine());
+            
+            Console.WriteLine("Enter a string");
+            string str=Console.ReadLine();
+            
+            Console.WriteLine("int: "+intNum);
+            Console.WriteLine("float: "+floatNum);
+            Console.WriteLine("double: "+doubleNum);
+            Console.WriteLine("long: "+longNum);
+            Console.WriteLine("string: "+str);
+        }
+    }
+}
+_________________________________________________________________________________________
+-----------------------------------------------------------------------------------------
+
+Logical error
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ApplicationForm //DO NOT change the namespace name
+{
+	public class Program //DO NOT change the class name
+	{
+		public static void Main(string[] args) //DO NOT change the 'Main' method signature
+		{
+		    Console.WriteLine("Enter name");
+            string name = Console.ReadLine();
+
+            Console.WriteLine("Enter age");
+            int age = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Enter qualification");
+            string qualification = Console.ReadLine();
+
+            Console.WriteLine("Enter PG/UG percentage");
+            float percentage = Convert.ToSingle(Console.ReadLine());// use single for float
+
+            Console.WriteLine("I am " + name +" " + age + " years old. I have completed "+ qualification + " with " + percentage+" percentage.");
+
+		}
+	}
+}
+_________________________________________________________________________________________
+-----------------------------------------------------------------------------------------
+
+License Verification
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LicenseEligibility //DO NOT change the namespace name
+{
+    public class Program //DO NOT change the class name
+    {
+        public static void Main(string[] args)  //DO NOT change the method signature
+        {
+            Console.WriteLine("Enter the age:");
+            int age=Convert.ToInt32(Console.ReadLine());
+            
+            if (age>=16)
+            {
+                Console.WriteLine("Applicant is eligible");
+            }else
+            {
+                Console.WriteLine("Applicant is not eligible");
+            }
+        }
+    }
+}
+
+
+_________________________________________________________________________________________
+-----------------------------------------------------------------------------------------
+
+
+
+Task 28-12-2022
+****************************************
+
+Proof Validations
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ProofValidations //DO NOT change the namespace name
+{
+    public class Program //DO NOT change the class name
+    {
+        public static void Main(string[] args)  //DO NOT change the method signature
+        {
+            Console.WriteLine("Driving License:");
+            string isDrivingLic=Console.ReadLine();
+            
+            Console.WriteLine("ID Proof:");
+            string isIdProof=Console.ReadLine();
+
+            Console.WriteLine("Passport:");
+            string isPassport=Console.ReadLine();
+            
+            if(isDrivingLic.Equals("Available") && (isDrivingLic.Equals(isIdProof)||isDrivingLic.Equals(isPassport)))
+            {
+                Console.WriteLine("No ticket issued");
+            }
+            else
+            {
+                Console.WriteLine("Ticket issued");
+            }
+        }
+    }
+}
+
+
+_________________________________________________________________________________________
+-----------------------------------------------------------------------------------------
+
+Grading System
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Grading //DO NOT change the namespace name
+{
+    public class Program //DO NOT change the class name
+    {
+        public static void Main(string[] args)  //DO NOT change the method signature
+        {
+            Console.WriteLine("Enter the grade:");
+            char grade=Convert.ToChar(Console.ReadLine());
+            
+            switch(grade)
+            {
+                case 'A':
+                        Console.WriteLine("90-100");
+                        break;
+                
+                case 'B':
+                        Console.WriteLine("80-90");
+                        break;
+                
+                case 'C':
+                        Console.WriteLine("70-80");
+                        break;
+                
+                case 'D':
+                        Console.WriteLine("60-70");
+                        break;
+                
+                case 'E':
+                        Console.WriteLine("50-60");
+                        break;
+                        
+                case 'F':
+                        Console.WriteLine("<50");
+                        break;
+                        
+                default :
+                        Console.WriteLine("Invalid grade");
+                        break;
+                
+            }
+        }
+    }
+}
+
+
+_________________________________________________________________________________________
+-----------------------------------------------------------------------------------------
+
+Print Even Numbers from the given number
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ProgFundamentals8               //DO NOT CHANGE the name of namespace
+{
+    public class Program                  //DO NOT CHANGE the name of class 'Program'
+    { 
+        public static void Main(string[] args)      //DO NOT CHANGE 'Main' Signature
+        {
+           Console.WriteLine("Enter starting number : ");
+           int num = Convert.ToInt32(Console.ReadLine());
+           
+           int count = 0;
+            while(count < 10)
+           {
+               if(num % 2 == 0)
+               {
+                   Console.Write(num+2+" ");
+                   num += 2;
+                   count++;
+               }
+               else
+               {
+                   Console.Write(num+1+" ");
+                   num += 2;
+                   count++;
+               }
+           }
+        }
+    }
+}
+
+_________________________________________________________________________________________
+-----------------------------------------------------------------------------------------
+
+Detention
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Looping //DO NOT change the namespace name
+{
+    public class Program //DO NOT change the class name
+    {
+        public static void Main(string[] args)  //DO NOT change the method signature
+        {
+            Console.WriteLine("Number of times:");
+            int num=Convert.ToInt32(Console.ReadLine());
+            
+            Console.WriteLine("Enter the message:");
+            string message=Console.ReadLine();
+            
+            for(int i=0;i<num;i++)
+            {
+                Console.WriteLine(message);
+            }
+        }
+    }}
+
+_________________________________________________________________________________________
+-----------------------------------------------------------------------------------------
+
+Print the pattern
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DoWhile //DO NOT change the namespace name
+{
+    public class Program //DO NOT change the class name
+    {
+        public static void Main(string[] args)  //DO NOT change the method signature
+        {
+            int num=1;
+        do{
+           for(int i=1;i<3;i++)
+           {
+               Console.WriteLine($"{num} {i}");
+           }
+           num++;
+        }while(num<6);
+        }
+    }
+}
+
+_________________________________________________________________________________________
+-----------------------------------------------------------------------------------------
+
+Reverse Multiplication
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ForLoop //DO NOT change the namespace name
+{
+    public class Program //DO NOT change the class name
+    {
+        public static void Main(string[] args)  //DO NOT change the method signature
+        {
+            Console.WriteLine("Enter the number:");
+            int num=Convert.ToInt32(Console.ReadLine());
+            
+            for(int i=10;i>0;i--)
+            {
+                Console.WriteLine($"{num} * {i} = "+(num*i));
+            }
+        }
+    }
+}
+
+_________________________________________________________________________________________
+-----------------------------------------------------------------------------------------
