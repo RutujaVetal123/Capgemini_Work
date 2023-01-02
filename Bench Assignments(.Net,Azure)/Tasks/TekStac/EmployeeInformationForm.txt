@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+ <body bgcolor=" #ffff66"><h1 style="color:purple"><u>Employee Basic Information</u></h1>
+ <div >
+  <form >
+   <fieldset style="background: #ffffff" id=personal>
+   <legend><i><b>Personal information</b></i></legend>
+   <legend id=personallegend></legend>
+   <label for="Employee Name"><i><b>Employee Name</b></i></label>
+   <input required type="text" id="employeename" placeholder="Enter the employee name"><br><br>
+   <label for="Employee Id"><i><b>Employee Id</b></i></label>
+   <input required type="text" id="employeeid" placeholder="Enter the employee Id"><br><br>
+   <label for="Aadhar Number"><i><b>Aadhar Number</b></i></label>
+   <input required type ="text" id="aadharnumber" pattern="\d{4}-\d{4}-\d{4}" placeholder="Enter the aadhar number"><br><br>
+   <label for="Enter Email"><i><b>Enter Email</b></i></label>
+   <input required type="text" id="email"  placeholder="Enter the email"><br><br></fieldset>
+  </form>
+ </div>
+
+ <div>
+  <form >
+   <fieldset style="background-color:#ffdd99" id=current>
+   <legend><i><b>Current position</b></i></legend>
+   <legend id=currentlegend></legend>
+   <label for="Department"><i><b>Department</b></i></label>
+   <input required type="text" id=department><br><br>
+   <label for="Designation"><i><b>Designation</b></i></label>
+   <input required type="text" id=designation><br><br>
+   <label for="Location"><i><b>Location</b></i></label>
+   <input required type="text" id=location><br><br>
+   </fieldset>
+  </form>
+ </div>
+
+ <div>
+  <form >
+   <fieldset style="background-color:#fae6ff" id=previous>
+   <legend ><i><b>Previous Employment</b></i> </legend>
+   <legend id=previouslegend></legend >
+   <label for="Employer"><i><b>Employer</b></i></label>
+   <input required type="text" id=employer><br><br>
+   <label for="Employer Designation"><i><b>Employer Designation</b></i></label>
+   <input required type="text" id=employerdesignation><br><br>
+   </fieldset>
+   <input style= "color:white;background-color: blue;" type ="Submit" id=submit value="Save & Continue"> 
+  </form>
+ </div>
+
+</body>
+</html>
