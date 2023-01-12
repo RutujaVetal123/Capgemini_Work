@@ -218,7 +218,8 @@ namespace Grading //DO NOT change the namespace name
 _________________________________________________________________________________________
 -----------------------------------------------------------------------------------------
 
-Print Even Numbers from the given number
+Print Even Numbers from the given number :
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -257,7 +258,8 @@ namespace ProgFundamentals8               //DO NOT CHANGE the name of namespace
 _________________________________________________________________________________________
 -----------------------------------------------------------------------------------------
 
-Detention
+Detention :
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -286,7 +288,8 @@ namespace Looping //DO NOT change the namespace name
 _________________________________________________________________________________________
 -----------------------------------------------------------------------------------------
 
-Print the pattern
+Print the pattern :
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -314,7 +317,7 @@ namespace DoWhile //DO NOT change the namespace name
 _________________________________________________________________________________________
 -----------------------------------------------------------------------------------------
 
-Reverse Multiplication
+Reverse Multiplication :
 
 using System;
 using System.Collections.Generic;
@@ -341,3 +344,391 @@ namespace ForLoop //DO NOT change the namespace name
 
 _________________________________________________________________________________________
 -----------------------------------------------------------------------------------------
+
+Number Palindrome : 
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PalindromeNumber  //DO NOT change the namespace name
+{
+    public class Program //DO NOT change the class name
+    {
+       public static void Main(string[] args)  //DO NOT change the "Main" method signature
+       {
+         
+             int input = Convert.ToInt32(Console.ReadLine());
+             int mod,temp,sum=0;
+             temp=input;
+             while(input>0)
+             {
+                mod=input%10;
+                sum=(sum*10)+mod;
+                input=input/10;
+             }
+             if(temp==sum)
+             {
+                 Console.WriteLine("Palindrome");
+             }
+             else
+             {
+                 Console.WriteLine("Not a Palindrome");
+             }
+       }  
+    }
+}
+
+_________________________________________________________________________________________
+-----------------------------------------------------------------------------------------
+ 
+Task 2-1-2023
+****************************************
+
+Name Verification : 
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Strings1 //DO NOT change the namespace name
+{
+    public class Program //DO NOT change the class name
+    {
+        public static void Main(string[] args)  //DO NOT change the method signature
+        {
+            //Implement your code here
+            Console.WriteLine("Enter the String names");
+            string str = Console.ReadLine();
+            
+            string[] nameStr=str.Split(',');
+            
+            for(int i =0 ;i<nameStr.Length;i++)
+            {
+                
+                string temp = nameStr[i];
+                string tempName= temp.Replace(" ","");
+                int count=0;
+                for(int j=0;j<tempName.Length;j++)
+                {
+                    if(!Char.IsLetter(tempName[j]))
+                    {
+                        count++;
+                    }
+                    
+                }
+                if(count==0)
+                {
+                    Console.WriteLine(tempName +"==>" + "Verified");
+                }
+                else
+                {
+                    Console.WriteLine(tempName+"==>"+   "Invalid details");
+                }
+            }
+        }
+    }
+}
+ _________________________________________________________________________________________
+-----------------------------------------------------------------------------------------\
+
+Replace The Characters :
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Strings2 //DO NOT change the namespace name
+{
+    public class Program //DO NOT change the class name
+    {
+        public static void Main(string[] args)  //DO NOT change the method signature
+        {
+            Console.WriteLine("Enter the string:");
+            string input = Console.ReadLine();
+            bool valid = true;
+            string en = input;
+            for(int i=0; i<input.Length; i++)
+            {
+                if(!Char.IsLetter(input[i]))
+                {
+                    valid = false;
+                    break;
+                }
+            }
+            if(valid)
+            {
+                for(int j=0; j<input.Length; j++)
+                {
+                    if(j==0||j%2==0)
+                    {
+                        int ascii = input[j];
+                        if(ascii==90)
+                        {
+                            ascii=65;
+                        }
+                        else if(ascii==122){
+                            ascii=97;
+                        }
+                        else{
+                            ascii++;
+                        }
+                        char replace = (char)ascii;
+                            StringBuilder sb = new StringBuilder(en);
+                            sb[j] = replace;
+                            en = sb.ToString();
+                    }
+                }
+                Console.WriteLine(input+en);
+            }
+            else
+            {
+                Console.WriteLine("Invalid input");
+            }
+            
+        }
+    }}
+ 
+_________________________________________________________________________________________
+-----------------------------------------------------------------------------------------
+
+Task 3-1-2023 
+****************************************
+
+String - Find and replace the character (First occurrence) :
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+ 
+
+namespace CharacterReplacing //DO NOT change the namespace name
+{
+    public class Program
+    {
+     public static void Main(string[] args)
+     {
+         string sentence;
+         //int a = 1;
+         Console.WriteLine("Enter the string:");
+         sentence = Console.ReadLine();
+         Console.WriteLine("Enter the character to be searched:");
+         string search = Console.ReadLine();
+         Console.WriteLine("Enter the character to replace:");
+         string replace = Console.ReadLine();
+         var regex = new Regex(Regex.Escape(search));
+         string newSentence=regex.Replace(sentence,replace , 1);
+         Console.WriteLine(newSentence);
+        
+     }
+   }
+}
+
+_________________________________________________________________________________________
+-----------------------------------------------------------------------------------------
+
+Task 4-1-2023
+****************************************
+
+Driving License Approval : 
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Array_1 //DO NOT change the namespace name
+{
+    public class Program //DO NOT change the class name
+    {
+        public static void Main(string[] args)  //DO NOT change the method signature
+        {
+            Console.WriteLine("Enter the number of applications:");
+            int num = Convert.ToInt32(Console.ReadLine());
+            
+            Console.WriteLine("Enter the applicant names:");
+            string[] applicantNames = new string[num];
+            
+            for(int i=0;i<num;i++)
+            {
+                applicantNames[i]=Console.ReadLine();
+            }
+            
+            int Verified=0, NotVerified=0;
+            string temp;
+            for(int i=0;i<num;i++)
+            {
+                temp=applicantNames[i];
+                temp=temp.Replace(" ","");
+                bool isAlpha = temp.All(Char.IsLetter);
+                
+                if(isAlpha==true)
+                {
+                    Verified++;
+                }
+                else
+                {
+                    NotVerified++;
+                }
+            }
+            
+            Console.WriteLine("Verified = "+Verified);
+            Console.WriteLine("Not verified = "+NotVerified);
+        }
+    }
+}
+
+_________________________________________________________________________________________
+-----------------------------------------------------------------------------------------
+
+Array Multiplication : 
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Array_2 //DO NOT change the namespace name
+{
+    public class Program //DO NOT change the class name
+    {
+        public static void Main(string[] args)  //DO NOT change the method signature
+        {
+            //Implement your code here
+             string fnum, snum;
+            int num1=0;
+            int num2=0;
+            int sum=0;
+            Console.WriteLine("Enter the input 1:");
+            fnum = Console.ReadLine();
+            Console.WriteLine("Enter the input 2:");
+            snum = Console.ReadLine();
+            if(fnum.Length == snum.Length)
+            {
+                char[] first = fnum.ToCharArray();
+                char[] second = snum.ToCharArray();
+
+                for(int i=0; i<first.Length; i++)
+                {
+                    num1 = (int)Char.GetNumericValue(first[i]);
+                    num2 = (int)Char.GetNumericValue(second[i]);
+                    sum = sum+(num1*num2);
+                }
+
+                Console.WriteLine(sum);
+            }
+
+            else
+            {
+                Console.WriteLine("Invalid inputs");
+            }
+        }
+    }
+}
+
+_________________________________________________________________________________________
+-----------------------------------------------------------------------------------------
+
+Task 9-1-2023
+****************************************
+
+Sum of factorial of positive and single digit numbers in an array :
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SumOfFactorial //DO NOT change the namespace name
+{
+   public class Program
+   {
+       public static void Main(string[] args) 
+        {            
+            
+            Console.WriteLine("Enter the size of an array:");
+    int n = Convert.ToInt32(Console.ReadLine());
+        int[] arr = new int[n]; 
+       
+        int sum=0;
+        Console.WriteLine("Enter the elements:");
+      for(int i=0;i<n;i++)
+      {
+          arr[i]=Convert.ToInt32(Console.ReadLine());
+      }
+      
+     for(int j=0;j<n;j++)  
+     {
+        if(arr[j]>0 && arr[j]<10){
+         int fact=1;
+            for(int i=1;i<=arr[j];i++)
+            {      
+                fact=fact*i;      
+            } 
+            sum+=fact;
+            
+        }
+    }
+    if(sum==0)
+    {
+        Console.WriteLine("No positive and single digit numbers found in an array");
+    }
+    else 
+    Console.WriteLine(sum);
+        } 
+   }
+}
+
+_________________________________________________________________________________________
+-----------------------------------------------------------------------------------------
+
+Display Product Details :
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OOPS1 //DO NOT change the namespace name
+{
+    public class Program{
+        public String DisplayProducts(Product productObj)
+        {
+            return "Product id : " + productObj.ProductId + "\n" + productObj.ProductName + " is on sale for " + productObj.ProductCost + "$";
+        }
+        
+        public static void Main(string[] args)  //DO NOT change the method signature
+        {
+            //Implement your code here
+            Program program=new Program();
+            Product product=new Product();
+            
+            Console.WriteLine("Enter the product id:");
+            product.ProductId=Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter the product name:");
+            product.ProductName=Console.ReadLine();
+            Console.WriteLine("Enter the product cost:");
+            product.ProductCost=Convert.ToSingle(Console.ReadLine());
+           
+          String result= program.DisplayProducts(product);
+          Console.WriteLine(result);
+        }
+    }
+}
+
+_________________________________________________________________________________________
+-----------------------------------------------------------------------------------------
+
