@@ -1,0 +1,121 @@
+CourseRepository : 
+
+Program.cs-------------------------------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Exercise1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            CourseContext cc = new CourseContext();
+            CourseRepository cr = new CourseRepository(cc);
+            Course c1 = new Course {CourseName="Java Programming",Duration=3,InstructorName="Sam" };
+           // Course c3 = new Course { CourseName = "CSharp Programming",CourseFee=5000, Duration = 4, InstructorName = "Sandy" };
+            
+            Course c2 = null;
+            using (cc)
+            {
+                cr.InsertCourse(c1);
+                c2 = cr.GetCourseByID(1);
+            }
+
+            Console.WriteLine("Name :" + c2.InstructorName);
+            //Console.ReadKey();
+        }
+    }
+}
+	 	  	 	 	   	  	    	 	
+
+*****************************************************************************************************************************************
+
+Course.cs--------------------------------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Exercise1
+{
+  public  class Course
+    {
+        public int CourseId { get; set; }
+        public String CourseName { get; set; }
+        public double CourseFee { get; set; }
+        public int Duration { get; set; }
+        public String InstructorName { get; set; }
+
+    }
+}
+
+*****************************************************************************************************************************************
+
+CourseRepository.cs----------------------
+
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+namespace Exercise1
+{
+   public class CourseRepository
+    {
+        private CourseContext context;
+        public CourseRepository(CourseContext context)
+        {
+            this.context = context;
+        }
+        
+        public IList<Course> GetCourseList()
+        {
+            return context.Courses.ToList();
+        }
+
+        public Course GetCourseByID(int courseId)
+        {
+            return context.Courses.Find(courseId);
+        }
+
+        public void InsertCourse(Course course)
+        {
+            context.Courses.Add(course);
+            context.SaveChanges();
+        }
+
+        public Course UpdateCourseFee(int id, double fee)
+        {
+            Course c=context.Courses.Find(id);
+            c.CourseFee = fee;
+            context.SaveChanges();
+            return c;
+        }	 	  	 	 	   	  	    	 	
+    }
+}
+
+
+*****************************************************************************************************************************************
+
+CourseContext.cs-------------------------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Data.Entity;
+
+namespace Exercise1
+{
+  public  class CourseContext:DbContext
+    {
+        public CourseContext():base("name=CourseConnectionString"){}
+        public virtual DbSet<Course> Courses { get; set; }
+    }
+}

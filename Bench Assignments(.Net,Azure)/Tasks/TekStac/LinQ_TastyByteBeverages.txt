@@ -1,0 +1,191 @@
+Tasty Byte Beverages
+
+Program.cs-------------------------------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Beverages  // Do not change the namespace name
+{
+	public class Program  // Do not change the class name
+	{
+		public static List<Beverage> beverageList = new List<Beverage>()
+		{
+			new Beverage(){ Id=1,Name="Pepsi",Cost=150,Quantity=2000},
+			new Beverage(){ Id=2,Name="Maaza",Cost=120,Quantity=3000},
+			new Beverage(){ Id=3,Name="RedBull",Cost=500,Quantity=2000},
+			new Beverage(){ Id=4,Name="Coke",Cost=200,Quantity=2000},
+			new Beverage(){ Id=5,Name="Fanta",Cost=500,Quantity=3000}
+		};
+
+		public static void Main(string[] args)  // Do not change the method signature
+		{
+
+			// Implement the code here
+			Beverage beverageObj = new Beverage();
+
+			
+			while (true)
+			{
+				Console.WriteLine("Enter the choice: ");
+				Console.WriteLine("1. Get Beverage Name by Cost");
+				Console.WriteLine("2. Get Beverage Details based on Search Letters");
+				Console.WriteLine("3. Group Beverage By Quantity");
+				Console.WriteLine("4. Exit");
+
+				int choice = Convert.ToInt32(Console.ReadLine());
+
+				switch (choice)
+				{	 	  	  		    	  	   	    	 	
+					case 1:
+						{
+							Console.WriteLine("Enter the Cost");
+							beverageObj.Cost = Convert.ToDouble(Console.ReadLine());
+
+							IEnumerable<Beverage> result = BeverageMethods.GetBeverageByCost(beverageObj.Cost);
+
+							Console.WriteLine("Name ");
+							foreach (var r in result)
+							{
+								Console.WriteLine(r.Name);
+							}
+
+							break;
+						}
+					case 2:
+						{
+							Console.WriteLine("Enter the Search Letter of Beverage Name");
+							char letter = Console.ReadLine()[0];
+
+							IEnumerable<Beverage> result = BeverageMethods.GetBeverageBySearch(letter);
+
+							Console.WriteLine("Id\t\tName\t\tCost\t\tQuantity");
+							foreach (var r in result)
+							{
+								Console.WriteLine(r.Id + "		" + r.Name + "		" + r.Cost + "		" + r.Quantity);
+							}
+
+							break;
+						}
+					case 3:
+						{
+							List<string> result = BeverageMethods.GroupByQuantity();
+
+							foreach (string s in result)
+								Console.WriteLine(s);
+
+
+							break;
+						}	 	  	  		    	  	   	    	 	
+					case 4:
+						{
+							Console.WriteLine("Thank you");
+							return;
+						}
+				}
+			}
+			Console.ReadLine();
+		}
+
+		public static ParameterExpression variableExpr = Expression.Variable(typeof(IEnumerable<Beverage>), "sampleVar");
+		public static Expression GetMyExpression(double cost)
+		{
+
+			Expression assignExpr = Expression.Assign(variableExpr, Expression.Constant(Program.beverageList.Where(w => w.Cost == cost)/**Copy and Paste the 'GetBeverageByCost' LINQ Query here **/));
+			return assignExpr;
+		}
+
+		public static Expression GetMyExpression1(char letter)
+		{
+
+			Expression assignExpr = Expression.Assign(variableExpr, Expression.Constant(Program.beverageList.Where(w => w.Name[0] == letter)/**Copy and Paste the 'GetBeverageBySearch' LINQ Query here **/));
+			return assignExpr;
+		}
+
+		public static ParameterExpression variableExpr1 = Expression.Variable(typeof(List<IGrouping<double,Beverage>>), "sampleVar");
+		public static Expression GetMyExpression2()
+		{
+
+			Expression assignExpr = Expression.Assign(variableExpr1, Expression.Constant(Program.beverageList.GroupBy(g=>g.Quantity).ToList()/**Copy and Paste the 'GroupByQuantity' LINQ Query here **/));
+			return assignExpr;
+		}
+	}
+}
+	 	  	  		    	  	   	    	 	
+******************************************************************************************************************************************************************************************************************************
+
+Beverage.cs-----------------------------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Beverages  // Do not change the namespace name
+{
+	public class Beverage  // Do not change the class name
+	{
+		// Implement the code here
+		public int Id { set; get; }
+		public String Name { set; get; }
+		public double Cost { set; get; }
+		public double Quantity { set; get; }
+
+	}
+}
+
+******************************************************************************************************************************************************************************************************************************
+
+BeverageMethods.cs----------------------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+ 
+namespace Beverages  // Do not change the namespace name
+{
+	public class BeverageMethods  // Do not change the class name
+	{
+		public static IEnumerable<Beverage> GetBeverageByCost(double cost)  // Do not change the method signature
+		{
+			IEnumerable<Beverage> resultList = Program.beverageList.Where(w => w.Cost == cost);// Write the LINQ Query here
+			
+			return resultList;
+            
+		}
+		public static IEnumerable<Beverage> GetBeverageBySearch(char letter)   // Do not change the method signature
+		{
+			IEnumerable<Beverage> resultList = Program.beverageList.Where(w => w.Name[0] == letter);// Write the LINQ Query here
+			
+			return resultList;
+            
+		}
+		public static List<string> GroupByQuantity()
+		{
+			var result = Program.beverageList.GroupBy(g => g.Quantity).ToList();
+
+			List<string> resultList = new List<string>();
+			Console.WriteLine(resultList);
+			foreach (var r in result)
+			{
+				foreach (Beverage item in r)
+				{
+					if (item == r.First())
+					{
+						resultList.Add(r.Key.ToString());
+					}	 	  	  		    	  	   	    	 	
+					resultList.Add(item.Name);
+				}
+			}
+
+			return resultList;
+		}
+	}
+}

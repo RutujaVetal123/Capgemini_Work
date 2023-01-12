@@ -1,0 +1,167 @@
+BookEntry_FluentAPI : 
+
+Book.cs----------------------------------
+
+//THIS IS FOR REFERENCE ONLY. YOU ARE NOT REQUIRED TO MAKE ANY CHANGES HERE
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Exercise1           //DO NOT Change the namespace name 
+{
+   public class Book //DO NOT Change the class name
+    {
+       public int BookId { get; set; }
+        public String BookName { get; set; }
+        public String BookAuthor { get; set; }
+        public String BookGenre { get; set; }
+        public double BookPrice { get; set; }
+
+    }
+}
+
+
+*********************************************************************************************************************
+
+BookUtil.cs------------------------------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Exercise1              //DO NOT change the namespace name
+{
+    public class BookUtil         //DO NOT change the class name 
+    {
+        LibraryContext lb = new LibraryContext();
+        public Book AddBook(Book book)    //DO NOT change the method Name and Signature
+        {
+            //Implement code to insert the book entity to database
+            
+            lb.Books.Add(book);
+            var r =lb.SaveChanges();
+            if(r>0){Console.WriteLine("Added Successfully");}
+            return book;
+        }
+
+
+        public List<Book> GetBookByGenre(String Genre)   //DO NOT change the method Name and Signature
+        {
+            //Implement code to get the book entity from database based on Genre
+            var query = from list in lb.Books 
+                        where(list.BookGenre==Genre)
+                        select list;
+            List<Book> b = new List<Book>();
+            b=query.ToList<Book>();
+            return b;
+            
+        }
+        public List<Book> GetBooksList() //DO NOT change the method Name and Signature
+        {
+             //Implement code to get the book list from database
+            var query = from list in lb.Books 
+                         select list;
+            List<Book> b = new List<Book>();
+            b=query.ToList<Book>();
+            return b;
+        }
+        public Book UpdateBookPrice(int NewPrice,int Bookid)   //DO NOT change the method Name and Signature
+        {
+             //Implement code to update the book entity 
+             var query = lb.Books.SingleOrDefault(c=>c.BookId==Bookid);
+             if(query!=null){
+                 query.BookPrice=NewPrice;
+                 var r = lb.SaveChanges();
+                 if(r>0){
+                     Console.WriteLine("Updated Successfully");
+                 }
+                
+             }
+             return query;
+        
+        }
+
+        public Book DeleteBook(int BookId)  //DO NOT change the method Name and Signature
+        {
+            //Implement code to delete the book entity by Id
+            Book b = new Book();
+            b = lb.Books.Where(d=>d.BookId == BookId).First();
+            lb.Books.Remove(b);
+            lb.SaveChanges();
+            return b;
+        }
+
+    }
+}
+
+
+*********************************************************************************************************************
+
+LibraryContext.cs------------------------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.Entity;
+
+namespace Exercise1                      //DO NOT change the namespace name
+{
+    class LibraryContext:DbContext        //DO NOT change the class name
+    {
+
+        //DO NOT change the context name
+        public LibraryContext() : base("name=BookStore")
+        {
+
+
+        }
+       
+       
+        //Implement Books of type DbSet
+        public 	DbSet< Book > Books {get;set;}
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            //Implement code to make 'Book_id' required in entity 'Book' and table name as mentioned in description 
+            modelBuilder.Entity<Book>().Property(b => b.BookId).IsRequired();
+            
+        }
+    }
+}
+
+*********************************************************************************************************************
+
+Program.cs------------------------------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Exercise1   //DO NOT change the namespace name
+{
+    public class Program   //DO NOT change the class name
+    {
+        static void Main(string[] args)      //DO NOT change the 'Main' method signature
+        {
+            //Implement code here
+            Book b = new Book();
+            BookUtil bu = new BookUtil();
+            Console.WriteLine("Enter Book Name");
+            b.BookName = Console.ReadLine();
+            Console.WriteLine("Enter Book Author");
+            b.BookAuthor = Console.ReadLine();
+            Console.WriteLine("Enter Book Genre");
+            b.BookGenre= Console.ReadLine();
+            Console.WriteLine("Enter Book Price");
+            b.BookPrice = Convert.ToDouble(Console.ReadLine());
+            Book c = bu.AddBook(b);
+        }
+    }
+}

@@ -1,0 +1,86 @@
+StudentDetails Using CodeFirst : 
+
+Program.cs-------------------------------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace StudentManagement               //DO NOT Change the namespace name
+{
+    public class Program              //DO NOT Change the class name
+    {
+        public static void Main(string[] args)
+        {
+            Student s1 = new Student() { StudentId = 102, StudentName = "GOD", Department = "ECE", EnrolledDate = new DateTime(2018, 06, 25), PhoneNumber = 8798654534 };
+            Program p1=new Program();
+            p1.AddStudent(s1);
+            Console.WriteLine("success");
+        }
+        
+        public void AddStudent(Student student){       //Do not change the method signature
+            
+            using (var ctx = new CollegeContext())
+            {
+                ctx.Students.Add(student);
+                ctx.SaveChanges();
+
+            }
+        }
+    }
+}
+
+
+**********************************************************************************
+
+Student.cs-------------------------------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace StudentManagement   //DO NOT Change the namespace name
+{
+    public class Student     //DO NOT Change the class name
+    {
+       public int StudentId { get; set; }
+        public String StudentName { get; set; }
+        public DateTime EnrolledDate { get; set; }
+        public String Department { get; set; }
+        public long PhoneNumber { get; set; }
+    }
+}
+
+
+**********************************************************************************
+
+CollegeContext.cs------------------------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.Entity;
+
+namespace StudentManagement      //DO NOT Change the namespace name
+{
+    public class CollegeContext: DbContext      //DO NOT Change the class name
+    {
+        //DO NOT Change the Context name 'StudentConnectionString'
+        public CollegeContext() : base("name=StudentConnectionString"){}
+        
+        public DbSet<Student> Students { get; set; }
+        
+       
+
+    }
+}
+
+
+**********************************************************************************
+
