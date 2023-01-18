@@ -834,3 +834,774 @@ namespace AutomaticTellerMachine //DO NOT CHANGE the namespace name
 
 _________________________________________________________________________________________
 -----------------------------------------------------------------------------------------
+
+AccountDetails :
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+//Please check the Problem description and create the class, fields, properties and methods.
+//Implement code here
+public class Account
+{
+    private int id;
+    private String accountType;
+    private double balance;
+    
+    public int Id { get { return id; } set { id = value; } }
+    public String AccountType { get { return accountType; } set { accountType = value; } }
+    public double Balance { get { return balance; } set { balance = value; } }
+    
+
+    public Account() { }
+    public Account(int id, String accountType, double balance)
+    {
+        
+    }
+    
+    public bool WithDraw(double cash)
+    {
+        if (balance>cash)
+        {
+            this.balance=this.balance-cash;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    public String GetDetails()
+    {
+        Console.WriteLine("Enter account id");                                                                
+        Id=Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("Enter account type");                             
+        AccountType=Console.ReadLine();
+        Console.WriteLine("Enter account balance");
+        Balance=Convert.ToDouble(Console.ReadLine());
+        if(Balance>0)
+        {
+            this.balance=Balance;
+        }
+        else{
+            this.balance=0;
+        }
+        
+        return "Account Id: "+Id+"\nAccount Type: "+AccountType+"\nBalance: "+Balance;
+    }
+    
+}
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        Account a1 = new Account();
+        Console.WriteLine(a1.GetDetails());
+        Console.Write("Enter amount to withdraw");
+        double amount = Convert.ToDouble(Console.ReadLine());
+        if (a1.WithDraw(amount))
+        {
+            Console.WriteLine("Balance " + a1.Balance);
+        }
+    }
+}
+_________________________________________________________________________________________
+-----------------------------------------------------------------------------------------
+
+Option Trading Details :
+ 
+Program.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OptionTradingDetails //DO NOT change the namespace name
+{
+	public class Program //DO NOT change the class name
+	{
+	    public OptionDetails GetDetails(String optionDetails) //DO NOT change the method signature
+        {
+            OptionDetails optiondetailsobj = new OptionDetails();
+            String[] strlist = optionDetails.Split(":", 5,
+               StringSplitOptions.RemoveEmptyEntries);
+            optiondetailsobj.StockExchange=strlist[0];
+            optiondetailsobj.OptionName=strlist[1];
+            optiondetailsobj.ExpiryDate=strlist[2];
+            optiondetailsobj.StrikeRate=Convert.ToInt32(strlist[3]);
+            optiondetailsobj.Option=strlist[4];
+            return optiondetailsobj;
+		}
+		public static void Main(string[] args) //DO NOT change the 'Main' method signature
+		{
+		    Program programobj = new Program();
+            Console.WriteLine("Enter the option order");
+            String optionDetails = Console.ReadLine();
+
+            OptionDetails result = programobj.GetDetails(optionDetails);
+            Console.WriteLine("StockExchange: " + result.StockExchange);
+            Console.WriteLine("OptionName: " + result.OptionName);
+            Console.WriteLine("ExpiryDate: " + result.ExpiryDate);
+            Console.WriteLine("StrikeRate: " + result.StrikeRate);
+            Console.WriteLine("Option: " + result.Option);
+		}
+	}
+}
+OptionDetails.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OptionTradingDetails //DO NOT change the namespace name
+{
+	public class OptionDetails //DO NOT change the class name
+	{
+	     public String StockExchange
+        {
+            get;
+            set;
+        }
+        public String OptionName
+        {
+            get;
+            set;
+        }
+        public String ExpiryDate
+        {
+            get;
+            set;
+        }
+        public int StrikeRate
+        {
+            get;
+            set;
+        }
+        public String Option
+        {
+            get;
+            set;
+        }
+	}
+}
+_________________________________________________________________________________________
+-----------------------------------------------------------------------------------------
+
+Inheritance and Polymorphism :
+
+Calculate Area Of Shapes
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MethodOverloading //DO NOT change the namespace name
+{
+    public class Program //DO NOT change the class name
+    {
+        public static void Main(string[] args)  //DO NOT change the method signature
+        {
+            //Implement your code here
+            
+            Shapes shape = new Shapes();
+            // bool flag = true;
+            int choice;
+            // while(flag)
+            // {
+                Console.WriteLine("1. Calculate area of rectangle\n2. Calculate area of square\n3. Calculate area of triangle");
+                Console.WriteLine("Enter your choice:");
+                choice=Convert.ToInt32(Console.ReadLine());
+                
+                switch(choice)
+                {
+                    case 1:
+                        Console.WriteLine("Enter the length:");
+                        int lenRectanle=Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Enter the breadth:");
+                        int breadthRectangle=Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine(shape.CalculateArea(lenRectanle,breadthRectangle));
+                        
+                        break;
+                    
+                    case 2:
+                        Console.WriteLine("Enter the length:");
+                        double length = Convert.ToDouble(Console.ReadLine());
+                        Console.WriteLine(shape.CalculateArea(length));
+                        break;
+                    
+                    case 3:
+                        Console.WriteLine("Enter the length:");
+                        float breadth=Convert.ToSingle(Console.ReadLine());
+                        Console.WriteLine("Enter the breadth:");
+                        float height=Convert.ToSingle(Console.ReadLine());
+                        Console.WriteLine(shape.CalculateArea(breadth,height));
+                        
+                        break;
+                        
+                    // case 4:
+                    //     flag=false;
+                    //     break;
+                }
+            // }
+        }
+    }
+}
+ 
+Shapes.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MethodOverloading //DO NOT change the namespace name
+{
+    public class Shapes //DO NOT change the class name
+    {
+        //Implement your code here
+        public int CalculateArea(int length, int breadth)
+        {
+            return length*breadth;
+        }
+        
+        public double CalculateArea(double length)
+        {
+            return length*length;
+        }
+        
+        public float CalculateArea(float breadth,float height)
+        {
+            return breadth*height*0.5f;
+        }
+        
+        
+    }
+}
+_________________________________________________________________________________________
+-----------------------------------------------------------------------------------------
+
+Area of Shapes :
+ 
+Program.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OOPS2 //DO NOT change the namespace name
+{
+    public class Program //DO NOT change the class name
+    {
+        public static void Main(string[] args)  //DO NOT change the method signature
+        {
+            //Implement your code here
+           
+            Triangle triangle=new Triangle();
+            
+            
+            Console.WriteLine("Enter the Parameter1");
+            triangle.Parameter1=Convert.ToSingle(Console.ReadLine());
+            Console.WriteLine("Enter the Parameter2");
+            triangle.Parameter2=Convert.ToSingle(Console.ReadLine());
+            
+            Console.WriteLine("Area of triangle: "+triangle.AreaOfTriangle());
+            Console.WriteLine("Area of rectangle: "+triangle.AreaOfRectangle());
+        }
+    }
+}
+
+Parameters.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OOPS2 //DO NOT change the namespace name
+{
+    public class Parameters //DO NOT change the class name
+    {
+        //Implement your code here
+        public double Parameter1{get;set;}
+        public double Parameter2{get;set;}
+
+
+    }    
+}
+
+Triangle.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OOPS2 //DO NOT change the namespace name
+{
+    public class Triangle : Parameters //DO NOT change the class name
+    {
+        //Implement your code here
+        public double AreaOfTriangle()
+        {
+            return base.Parameter1*base.Parameter2*0.5;
+        }
+        
+        public double AreaOfRectangle()
+        {
+            return base.Parameter1*base.Parameter2;
+        }
+    }
+}
+_________________________________________________________________________________________
+-----------------------------------------------------------------------------------------
+
+GameInheritance :
+ 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+//Please check the Problem description and create the class, fields, properties and methods.
+//Implement code here
+
+public class Game
+{
+    public string Name {get;set;}
+    public int MaxNumPlayers {get;set;}
+    
+    override public string ToString()
+    {
+        return "Maximum number of players for "+Name+" is "+MaxNumPlayers;
+    }
+}
+
+public class GameWithTimeLimit : Game
+{
+    public int TimeLimit{get;set;}
+    override public string ToString()
+    {
+        Console.WriteLine(base.ToString());
+        return "Time Limit for "+Name+" is "+TimeLimit+" minutes";
+    }
+}
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        Game game=new Game();
+        GameWithTimeLimit gameWithLimit = new GameWithTimeLimit();
+        
+        Console.WriteLine("Enter a game");
+        game.Name=Console.ReadLine();
+        Console.WriteLine("Enter the maximum number of players");
+        game.MaxNumPlayers=Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("Enter a game that has time limit");
+        gameWithLimit.Name=Console.ReadLine();
+        Console.WriteLine("Enter the maximum number of players");
+        gameWithLimit.MaxNumPlayers=Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("Enter the time limit in minutes");
+        gameWithLimit.TimeLimit=Convert.ToInt32(Console.ReadLine());
+        
+        Console.WriteLine(game);
+        Console.WriteLine(gameWithLimit);
+    }
+}
+_________________________________________________________________________________________
+-----------------------------------------------------------------------------------------
+
+EMI Calculator - Polymorphism :
+ 
+Program.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EmiCalculator //DO NOT Change namespace name
+{
+    public class Program      //DO NOT Change class 'Program' name
+    {
+        public static void Main(string[] args)
+        {
+            //Implement your code here
+            Program programObj=new Program();
+            Loan loan=new Loan();
+            
+            Console.WriteLine("Loan Number : ");
+            loan.LoanNumber=Console.ReadLine();
+            Console.WriteLine("Loan Provider Name : ");
+            loan.LoanProviderName=Console.ReadLine();
+            Console.WriteLine("Loan Amount Covered : ");
+            loan.LoanAmount=Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Select\n1.Personal Loan\n2.Home Loan");
+            int option = Convert.ToInt32(Console.ReadLine());
+            double result=programObj.addLoan(loan,option);
+            Console.WriteLine("Calculated EMI  : "+result);
+        }
+        
+        //Implement required methods here
+        public double addLoan(Loan loan,int opt)
+        {
+            double result=0.0;
+            switch(opt)
+            {
+                case 1:
+                    PersonalLoan pLoan=new PersonalLoan();
+                    pLoan.LoanNumber=loan.LoanNumber;
+                    pLoan.LoanProviderName=loan.LoanProviderName;
+                    pLoan.LoanAmount=loan.LoanAmount;
+                    
+                    Console.WriteLine("Number of Years : ");
+                    pLoan.NumberOfYears=Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Interest Rate : ");
+                    pLoan.InterestRate=Convert.ToSingle(Console.ReadLine());
+                    result=pLoan.calculateEmi();
+                    break;
+                
+                case 2:
+                    HomeLoan hLoan=new HomeLoan();
+                    hLoan.LoanNumber=loan.LoanNumber;
+                    hLoan.LoanProviderName=loan.LoanProviderName;
+                    hLoan.LoanAmount=loan.LoanAmount;
+                    
+                    Console.WriteLine("House Age : ");
+                    hLoan.HouseAge=Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Interest Rate : ");
+                    hLoan.InterestRate=Convert.ToSingle(Console.ReadLine());
+                    result=hLoan.calculateEmi();
+                    break;
+            }
+            return result;
+            
+        }
+    }
+}
+
+Loan.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EmiCalculator             //DO NOT Change namespace name
+{
+    //Implement the code here. Keep the class 'public'
+    public class Loan{
+        private string loanNumber;
+        private string loanProviderName;
+        private double loanAmount;
+    
+        public string LoanNumber{get{return loanNumber;} set{loanNumber=value;}}
+        public string LoanProviderName{get{return loanProviderName;} set{loanProviderName=value;}}
+        public double LoanAmount{get{return loanAmount;} set{loanAmount=value;}}
+    }
+    
+    public class PersonalLoan : Loan
+    {
+        private int numberOfYears;
+        private float interestRate;
+        
+        public int NumberOfYears{get{return numberOfYears;} set{numberOfYears=value;}}
+        public float InterestRate{get{return interestRate;} set{interestRate=value;}}
+        
+        
+        
+        public double calculateEmi()
+        {
+           double emi= (LoanAmount+ (LoanAmount*NumberOfYears*InterestRate*0.01))/(NumberOfYears*12);
+           return emi;
+        }
+    }
+    
+    public class HomeLoan : Loan
+    {
+        private int houseAge;
+        private float interestRate;
+        
+        public int HouseAge{get{return houseAge;} set{houseAge=value;}}
+        public float InterestRate{get{return interestRate;} set{interestRate=value;}}
+        
+        
+        
+        public double calculateEmi()
+        {
+           double emi= (LoanAmount+(LoanAmount*InterestRate*0.01))/(HouseAge*12);
+           return emi;
+        }
+        
+    }
+}
+_________________________________________________________________________________________
+-----------------------------------------------------------------------------------------
+
+Insurance Calculation - Work with Polymorphism : 
+
+Program.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace InsuranceDetails //DO NOT Change namespace name
+{
+    public class Program      //DO NOT Change class 'Program' name
+    {
+        public double addPolicy(Insurance ins,int opt)
+        {
+            double result=0.0;
+            switch(opt)
+            {
+                case 1:
+                    LifeInsurance lInsurance=new LifeInsurance();
+                    lInsurance.InsuranceNo=ins.InsuranceNo;
+                    lInsurance.InsuranceName=ins.InsuranceName;
+                    lInsurance.AmountCovered=ins.AmountCovered;
+                    Console.WriteLine("Policy Term : ");
+                    lInsurance.PolicyTerm=Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Benefit Percent : ");
+                    lInsurance.BenefitPercent=Convert.ToSingle(Console.ReadLine());
+                    result=lInsurance.calculatePremium();
+                    break;
+                
+                case 2:
+                    MotorInsurance mInsurance=new MotorInsurance();
+                    mInsurance.InsuranceNo=ins.InsuranceNo;
+                    mInsurance.InsuranceName=ins.InsuranceName;
+                    mInsurance.AmountCovered=ins.AmountCovered;
+                    Console.WriteLine("Depreciation Percent : ");
+                    mInsurance.DepPercent=Convert.ToSingle(Console.ReadLine());
+                    result= mInsurance.calculatePremium();
+                    break;
+            }
+            return result;
+        }
+        
+        public static void Main(string[] args)
+        {
+           //Implement code here
+           Program programObj=new Program();
+           Insurance insuranceObj=new Insurance();
+           
+           int option;
+           
+           Console.WriteLine("Insurance Number : ");
+           insuranceObj.InsuranceNo=Console.ReadLine();
+           Console.WriteLine("Insurance Name : ");
+           insuranceObj.InsuranceName=Console.ReadLine();
+           Console.WriteLine("Amount Covered : ");
+           insuranceObj.AmountCovered=Convert.ToDouble(Console.ReadLine());
+           Console.WriteLine("Select\n1.Life Insurance\n2.Motor Insurance");
+           option=Convert.ToInt32(Console.ReadLine());
+           
+           double result=programObj.addPolicy(insuranceObj,option);
+           Console.WriteLine("Calculated Premium : "+result);
+        }
+
+       //Implement required methods here
+    }
+}
+
+Insurance.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace InsuranceDetails             //DO NOT Change namespace name
+{
+    //Implement the code here. Keep the class 'public'
+    public class Insurance
+    {
+        private string insuranceNo;
+        private string insuranceName;
+        private double amountCovered;
+        
+        public string InsuranceNo{ set{insuranceNo=value;} get{return insuranceNo ;} }
+        public string InsuranceName{ set{insuranceName=value;} get{return insuranceName ;} }
+        public double AmountCovered{ set{amountCovered=value;} get{return amountCovered ;} }
+    }
+    
+    public class MotorInsurance : Insurance
+    {
+        private double idv;
+        private float depPercent;
+        
+        public double Idv{ set{idv=value;} get{return idv ;} }
+        public float DepPercent{ set{depPercent=value;} get{return depPercent ;} }
+        
+        public double calculatePremium()
+        {
+            double dPercent=Convert.ToDouble(DepPercent);
+            Idv = AmountCovered - ((AmountCovered * dPercent) / 100);
+            double result=Idv*0.03;
+            return result;
+        }
+    }
+    
+    public class LifeInsurance : Insurance
+    {
+        private int policyTerm;
+        private float benefitPercent;
+        
+        public int PolicyTerm{ set{policyTerm=value;} get{return policyTerm ;} }
+        public float BenefitPercent{ set{benefitPercent=value;} get{return benefitPercent ;} }
+        
+        public double calculatePremium()
+        {
+            double result=(AmountCovered - ((AmountCovered* BenefitPercent)/100)) / PolicyTerm;
+            return result;
+        }
+    }
+}
+_________________________________________________________________________________________
+-----------------------------------------------------------------------------------------
+
+Textile Shop :
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MultiLevelInheritance // Do not change the namespace name
+{
+    public class TextileShop
+    {
+       public string ClothesType
+        {   get;  set;   }
+        public int Quantity
+        {   get;  set;   }
+        public double Price
+       {   get;  set;   }
+        public double TotalPrice
+        {   get;  set;   }
+
+    }
+    public class Billing: TextileShop
+    {
+        public double GenerateBill()
+        {
+            TotalPrice = 0.0;
+            if(ClothesType == "Women")
+            {	 	  	    	 	      	  	 	
+                TotalPrice = Quantity * Price + 250;
+            }
+            else if (ClothesType == "Children")
+            {
+                TotalPrice = Quantity * Price + 50;
+            }
+            else if (ClothesType == "Men")
+            {
+                TotalPrice = Quantity * Price + 150;
+            }
+            return TotalPrice;
+        }
+    }
+    public class Discount : Billing
+    {
+        public double GetDiscount()
+        {
+            double result = 0.0;
+            if(ClothesType == "Women" && TotalPrice >=3000)
+            {
+                result = (TotalPrice * 12) / 100;
+                result = TotalPrice - result;
+            }
+            else if (ClothesType == "Children" && TotalPrice >= 1500)
+            {
+                result = (TotalPrice * 7) / 100;
+                result = TotalPrice - result;
+            }
+            else if (ClothesType == "Men" && TotalPrice >= 2000)
+            {
+                result = (TotalPrice * 10) / 100;
+                result = TotalPrice - result;
+            }
+            else
+            {
+                return TotalPrice;
+            }	 	  	    	 	      	  	 	
+            return result;
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Discount discountobj = new Discount();
+            Console.WriteLine("1.Men");
+            Console.WriteLine("2.Women");
+            Console.WriteLine("3.Children");
+            Console.WriteLine("4.Exit");
+
+            Console.WriteLine("Enter the choice");
+            int choice = Convert.ToInt32(Console.ReadLine());
+
+            switch(choice)
+            {
+                case 1:
+                    {
+                        discountobj.ClothesType = "Men";
+                        Console.WriteLine("Enter the quantity");
+                        discountobj.Quantity = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Enter the price");
+                        discountobj.Price = double.Parse(Console.ReadLine());
+                        double result1 = discountobj.GenerateBill();
+                        double result2 = discountobj.GetDiscount();
+                        Console.WriteLine("Bill:" + result1);
+                        Console.WriteLine("Bill with discount:" + result2);
+                        break;
+                    }
+                case 2:
+                    {
+                        discountobj.ClothesType = "Women";
+                        Console.WriteLine("Enter the quantity");
+                        discountobj.Quantity = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Enter the price");
+                        discountobj.Price = double.Parse(Console.ReadLine());
+                        double result1 = discountobj.GenerateBill();
+                        double result2 = discountobj.GetDiscount();
+                        Console.WriteLine("Bill:" + result1);
+                        Console.WriteLine("Bill with discount:" + result2);
+                        break;
+                    }	 	  	    	 	      	  	 	
+                case 3:
+                    {
+                        discountobj.ClothesType = "Children";
+                        Console.WriteLine("Enter the quantity");
+                        discountobj.Quantity = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Enter the price");
+                        discountobj.Price = double.Parse(Console.ReadLine());
+                        double result1 = discountobj.GenerateBill();
+                        double result2 = discountobj.GetDiscount();
+                        Console.WriteLine("Bill:" + result1);
+                        Console.WriteLine("Bill with discount:" + result2);
+                        break;
+                    }
+                case 4:
+                    {
+                        return;
+                    }
+            }
+        }
+    }
+}
+_________________________________________________________________________________________
+-----------------------------------------------------------------------------------------
