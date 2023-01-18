@@ -1,0 +1,204 @@
+Restaurant Discount :
+ 
+Program.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MethodOverride //DO NOT change the namespace name
+{
+    public class Program //DO NOT change the class name
+    {
+        public static void Main(string[] args)  //DO NOT change the method signature
+        {
+            //Implement your code here
+            
+            Console.WriteLine("1. Calculate bill for the standard customer\n2. Calculate bill for the vip customer");
+            Console.WriteLine("Enter your choice:");
+            int choice=Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter your amount:");
+            double amount=Convert.ToDouble(Console.ReadLine());
+            double result;
+            if(choice==1)
+            {
+                StandardCustomer stdCust = new StandardCustomer();
+                result=stdCust.Billing(amount);
+            }
+            else
+            {
+                VipCustomer vipCust=new VipCustomer();
+                result=vipCust.Billing(amount);
+            }
+            
+            Console.WriteLine(result);
+        }
+    }
+}
+
+VipCustomer.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MethodOverride //DO NOT change the namespace name
+{
+    public class VipCustomer : Restaurant //DO NOT change the class name
+    {
+        //Implement your code here
+        public override double Billing(double amount)
+        {
+            amount=amount-(amount*0.3);
+            return amount;
+        }
+    }
+}
+
+StandardCustomer.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MethodOverride //DO NOT change the namespace name
+{
+    public class StandardCustomer : Restaurant //DO NOT change the class name
+    {
+        //Implement your code here
+        public override double Billing(double amount)
+        {
+            amount=amount-(amount*0.1);
+            return amount;
+        }
+    }
+}
+
+Restaurant.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MethodOverride //DO NOT change the namespace name
+{
+    //Implement your code here
+    public abstract class Restaurant
+    {
+        public abstract double Billing(double amount);
+    }
+    
+}
+________________________________________________________________________________________
+----------------------------------------------------------------------------------------
+
+Payroll Department :
+
+Program.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Abstract //DO NOT change the namespace name
+{
+    public class Program //DO NOT change the class name
+    {
+        public static void Main(string[] args)  //DO NOT change the method signature
+        {
+            //Implement your code here
+            Console.WriteLine("1. Calculate salary for junior\n2. Calculate salary for senior\nEnter your choice:");
+            int choice=Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter the basic salary");
+            double basicSal=Convert.ToDouble(Console.ReadLine());
+            double Payment=0.0;
+            if(choice==1)
+            {
+                Junior junior=new Junior();
+                Payment=junior.CalculatePayment(basicSal);
+            }
+            else
+            {
+                Senior senior=new Senior();
+                Payment=senior.CalculatePayment(basicSal);
+            }
+            Console.WriteLine(Payment);
+        }
+    }
+}
+
+Payment.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Abstract //DO NOT change the namespace name
+{
+    
+    //Implement your code here
+    public abstract class Payment
+    {
+        public abstract double CalculatePayment(double basicSalary);
+    }
+}
+
+Senior.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Abstract //DO NOT change the namespace name
+{
+    
+    //Implement your code here
+    public class Senior:Payment
+    {
+        public override double CalculatePayment(double basicSalary)
+        {
+            double DA=basicSalary*0.15;
+            double HRA=basicSalary*0.1;
+            double Conveyance=basicSalary*0.07;
+            double MedicalAllowance=basicSalary*0.05;
+            double flexiblePortion=basicSalary*0.3;
+            
+            return basicSalary+DA+HRA+Conveyance+MedicalAllowance+flexiblePortion;
+        }
+    }
+}
+
+Junior.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Abstract //DO NOT change the namespace name
+{
+    
+    //Implement your code here
+    public class Junior:Payment
+    {
+        public override double CalculatePayment(double basicSalary)
+        {
+            double DA=basicSalary*0.12;
+            double HRA=basicSalary*0.1;
+            double Conveyance=basicSalary*0.05;
+            double MedicalAllowance=basicSalary*0.03;
+            double flexiblePortion=basicSalary*0.2;
+            
+            return basicSalary+DA+HRA+Conveyance+MedicalAllowance+flexiblePortion;
+        }
+    }
+}
+________________________________________________________________________________________
+----------------------------------------------------------------------------------------
